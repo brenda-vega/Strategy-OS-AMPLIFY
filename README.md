@@ -1,32 +1,32 @@
 # Strategy OS — AMPLIFY
 
-## Description
-Strategy OS is a rule-based decision engine for selecting a marketing strategy based on a single dominant bottleneck. It converts structured business input into a constrained strategic output: strategy, reasoning, risk, sales message, and first execution action.
+## Descripción
+Strategy OS es un motor de decisión basado en reglas para seleccionar estrategia de marketing a partir de un único cuello de botella dominante. Convierte input estructurado del negocio en un output estratégico restringido: estrategia, razonamiento, riesgo, mensaje de venta y primera acción de ejecución.
 
-## Input Schema
+## Esquema de Entrada
 etapa: pre | early | growth | mid  
 cuello: alcance | conversion | retencion | monetizacion | posicionamiento | sistema  
 icp_estado: definido | parcial | no  
 evidencia: alta | media | baja  
-hipotesis: string | optional  
+hipotesis: string | opcional  
 multiruta: boolean  
 
-## Core Logic
+## Lógica Central
 estrategia = f(cuello)  
-One bottleneck maps to one strategy. No parallel strategy execution.
+Un cuello de botella mapea a una sola estrategia. No se permite ejecución paralela de estrategias.
 
-## Decision System
-1. Read business context  
-2. Classify dominant bottleneck  
-3. Map bottleneck to strategy  
-4. Adjust risk by stage and evidence  
-5. Exclude invalid alternatives through anti-routes  
-6. Generate execution output  
+## Sistema de Decisión
+1. Lectura del contexto del negocio  
+2. Clasificación del cuello de botella dominante  
+3. Mapeo cuello → estrategia  
+4. Ajuste de riesgo por etapa y evidencia  
+5. Exclusión de alternativas inválidas (anti-rutas)  
+6. Generación de output de ejecución  
 
-## Risk Logic
+## Lógica de Riesgo
 riesgo_final = max(riesgo_base, riesgo_por_etapa, riesgo_por_evidencia)
 
-## Output Structure
+## Estructura de Salida
 {
   estrategia,
   razonamiento,
@@ -38,35 +38,35 @@ riesgo_final = max(riesgo_base, riesgo_por_etapa, riesgo_por_evidencia)
   accion_1
 }
 
-## Strategy Set
-alcance → ICP is not entering the system  
-conversion → Traffic exists, but does not close  
-retencion → Customers buy, but do not return  
-monetizacion → Revenue per customer is low  
-posicionamiento → Market does not understand the value  
-sistema → Operation depends on people, not process  
+## Set de Estrategias
+alcance → el ICP no entra al sistema  
+conversion → hay tráfico pero no cierra  
+retencion → compran pero no regresan  
+monetizacion → ingreso por cliente bajo  
+posicionamiento → el mercado no entiende el valor  
+sistema → la operación depende de personas, no de procesos  
 
-## Execution Rule
-1 bottleneck → 1 strategy → 1 execution layer  
+## Regla de Ejecución
+1 cuello → 1 estrategia → 1 capa de ejecución  
 
-## Constraints
-if icp_estado != definido → accuracy = degraded  
-if evidencia == baja → uncertainty = high  
-if multiple_strategies == true → signal_quality = low  
+## Restricciones
+if icp_estado != definido → precisión baja  
+if evidencia == baja → alta incertidumbre  
+if múltiples estrategias → pérdida de señal  
 
-## Integration Flow
-Foundation Diagnosis → ATLAS → Strategy OS → Funnel / Execution  
+## Flujo de Integración
+Diagnóstico de fundación → ATLAS → Strategy OS → Funnel / ejecución  
 
 ## Stack
 HTML  
 CSS  
-Vanilla JavaScript  
+JavaScript (vanilla)  
 
-## System Type
-Rule-based strategic decision system  
-Non-ML  
-Static logic  
-Deterministic output  
+## Tipo de Sistema
+Sistema de decisión estratégico basado en reglas  
+No utiliza ML  
+Lógica estática  
+Output determinista  
 
-## Version
+## Versión
 v1
