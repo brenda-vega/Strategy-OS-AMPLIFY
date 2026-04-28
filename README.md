@@ -1,120 +1,72 @@
 # Strategy OS — AMPLIFY
 
-Sistema operativo para toma de decisiones estratégicas en marketing.
+## Description
+Strategy OS is a rule-based decision engine for selecting a marketing strategy based on a single dominant bottleneck. It converts structured business input into a constrained strategic output: strategy, reasoning, risk, sales message, and first execution action.
 
-## 🧠 Qué es
+## Input Schema
+etapa: pre | early | growth | mid  
+cuello: alcance | conversion | retencion | monetizacion | posicionamiento | sistema  
+icp_estado: definido | parcial | no  
+evidencia: alta | media | baja  
+hipotesis: string | optional  
+multiruta: boolean  
 
-Strategy OS es una herramienta de diagnóstico y ejecución que permite:
+## Core Logic
+estrategia = f(cuello)  
+One bottleneck maps to one strategy. No parallel strategy execution.
 
-- Identificar el cuello de botella principal de un negocio
-- Seleccionar la estrategia correcta basada en ese problema
-- Generar un output accionable (mensaje + plan + ejecución)
+## Decision System
+1. Read business context  
+2. Classify dominant bottleneck  
+3. Map bottleneck to strategy  
+4. Adjust risk by stage and evidence  
+5. Exclude invalid alternatives through anti-routes  
+6. Generate execution output  
 
-No es un framework teórico. Es un sistema de decisión.
+## Risk Logic
+riesgo_final = max(riesgo_base, riesgo_por_etapa, riesgo_por_evidencia)
 
----
+## Output Structure
+{
+  estrategia,
+  razonamiento,
+  riesgo,
+  horizonte,
+  sales_story[],
+  value_bullets[],
+  objection: { principal, respuesta },
+  accion_1
+}
 
-## ⚙️ Cómo funciona
+## Strategy Set
+alcance → ICP is not entering the system  
+conversion → Traffic exists, but does not close  
+retencion → Customers buy, but do not return  
+monetizacion → Revenue per customer is low  
+posicionamiento → Market does not understand the value  
+sistema → Operation depends on people, not process  
 
-El sistema opera en 3 pasos:
+## Execution Rule
+1 bottleneck → 1 strategy → 1 execution layer  
 
-### 1. Brief (input)
-Se define el contexto del negocio:
-- Etapa
-- Cuello de botella
-- Estado del ICP
-- Nivel de evidencia
-- Hipótesis
+## Constraints
+if icp_estado != definido → accuracy = degraded  
+if evidencia == baja → uncertainty = high  
+if multiple_strategies == true → signal_quality = low  
 
-### 2. Estrategia (decisión)
-El sistema:
-- Selecciona la estrategia dominante
-- Muestra rutas posibles (si aplica)
-- Explica por qué esa estrategia y no otras
+## Integration Flow
+Foundation Diagnosis → ATLAS → Strategy OS → Funnel / Execution  
 
-### 3. Output (ejecución)
-Entrega:
-- Sales story (mensaje)
-- Bullets de valor
-- Objeción principal + respuesta
-- Plan de acción inicial
+## Stack
+HTML  
+CSS  
+Vanilla JavaScript  
 
----
+## System Type
+Rule-based strategic decision system  
+Non-ML  
+Static logic  
+Deterministic output  
 
-## 🧩 Estrategias disponibles
-
-El sistema trabaja con 6 tipos de estrategia:
-
-- Alcance (captación)
-- Conversión
-- Retención
-- Monetización
-- Posicionamiento
-- Sistema / Growth
-
-Cada una corresponde a un cuello de botella específico.
-
----
-
-## 🎯 Principio clave
-
-> La estrategia correcta es la que resuelve el cuello de botella principal.
-
-No se optimizan múltiples áreas al mismo tiempo.
-
----
-
-## ⚠️ Advertencias
-
-- Sin ICP definido → el sistema pierde precisión
-- Sin evidencia → aumenta el riesgo de ejecución
-- No sistematizar lo que no funciona
-
----
-
-## 🔗 Relación con ATLAS
-
-Flujo recomendado:
-
-Diagnóstico de fundación  
-→ Diagnóstico de marketing (ATLAS)  
-→ Strategy OS (decisión estratégica)  
-
----
-
-## 📌 Uso recomendado
-
-- Consultores / marketers
-- Diagnóstico rápido de negocios
-- Estructuración de propuestas
-- Diseño de estrategia previa a funnel
-
----
-
-## 🛠 Stack
-
-- HTML + CSS + JS (vanilla)
-- Sin dependencias externas
-- Diseñado para despliegue simple (GitHub Pages)
-
----
-
-## 🚀 Estado
-
-Versión: v1  
-Tipo: Sistema operativo estratégico (no framework teórico)
-
----
-
-## 🧭 Filosofía
-
-No más:
-
-- “hacer contenido”
-- “probar funnels”
-- “optimizar todo”
-
-Primero:
-
-👉 detectar el problema correcto  
-👉 luego ejecutar la estrategia correcta
+## Version
+v1
